@@ -1,4 +1,6 @@
-import { supabase } from "@/utils/supabase/client";
+import "client-only";
+
+import { supabase } from "@/lib/utils/supabase/client";
 
 export async function signUpUser(email: string, password: string, options?: object) {
   const { data, error } = await supabase.auth.signUp({
@@ -7,12 +9,8 @@ export async function signUpUser(email: string, password: string, options?: obje
     options: options, // Optional: add metadata like 'username' here
   });
 
-  if (error) {
-    console.error("Sign up error:", error.message);
-    return;
-  }
-
-  console.log("User signed up:", data.user);
+  if (error) return { user: null, error: error.message };
+  return { user: data.user, error: null };
 }
 
 export async function logInUser(email: string, password: string) {
@@ -21,10 +19,6 @@ export async function logInUser(email: string, password: string) {
     password: password,
   });
 
-  if (error) {
-    console.error("Log in error:", error.message);
-    return;
-  }
-
-  console.log("User logged in:", data.session);
+  if (error) return { user: null, error: error.message };
+  return { user: data.user, error: null };
 }

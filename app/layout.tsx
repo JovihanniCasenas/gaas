@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Toaster } from "@/components/ui/sonner";
 
 const sourceSans3 = Source_Sans_3({subsets:['latin'],variable:'--font-sans'});
 
@@ -33,6 +34,7 @@ export default function RootLayout({
         <div className="bg-gray-700">
           <div className="w-full max-w-[450px] h-screen mx-auto flex flex-col p-4 bg-yellow-50 dark:bg-gray-800">
             {children}
+            <Toaster position="top-center" />
           </div>
         </div>
       </body>
