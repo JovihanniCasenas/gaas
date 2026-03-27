@@ -13,11 +13,13 @@ import { logOutUser } from "@/lib/utils/auth/auth"
 import { getUser } from "@/lib/queries/user"
 import { toast } from "sonner"
 import { useRouter } from "next/navigation"
+import { useQueryClient } from "@tanstack/react-query"
 import { useState } from "react"
 
 export default function AppSidebar() {
   const router = useRouter()
   const { data: user } = getUser()
+  const queryClient = useQueryClient()
   const [isLoading, setIsLoading] = useState(false)
   const { toggleSidebar } = useSidebar()
 
@@ -27,6 +29,7 @@ export default function AppSidebar() {
     if (!success) {
       toast.error(`Logout failed. ${error}.`)
     } else {
+      queryClient.setQueryData(["getUser"], null)
       router.push("/login")
     }
     setIsLoading(false)

@@ -19,12 +19,15 @@ import {
 import { Label } from "@/components/ui/label"
 import { EyeIcon } from "@/components/icons/lucide-eye"
 import { EyeOffIcon } from "@/components/icons/lucide-eye-off"
-import { useState } from "react"
 import { toast } from "sonner"
+import { getUser } from "@/lib/queries/user"
+import { useState } from "react"
+import { useQueryClient } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
 
 export default function LoginPage() {
   const router = useRouter()
+  const queryClient = useQueryClient()
 
   const [isLogin, setIsLogin] = useState(true)
   const [isLoading, setIsLoading] = useState(false)
@@ -39,16 +42,17 @@ export default function LoginPage() {
     const password = formData.get("password") as string
     const username = formData.get("username") as string
 
-    var error
+    let error, user
     if (isLogin) {
-      ;({ error } = await logInUser(email, password))
+      ;({ error, user } = await logInUser(email, password))
     } else {
-      ;({ error } = await signUpUser(email, password, { username }))
+      ;({ error, user } = await signUpUser(email, password, { username }))
     }
     if (error) {
       console.error("Authentication error:", error)
       toast.error(`Failed to ${isLogin ? "login" : "sign up"}. ${error}.`)
     } else {
+      queryClient.setQueryData(["getUser"], user)
       router.push("/")
     }
     setIsLoading(false)
