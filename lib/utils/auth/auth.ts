@@ -22,3 +22,9 @@ export async function logInUser(email: string, password: string) {
   if (error) return { user: null, error: error.message };
   return { user: data.user, error: null };
 }
+
+export async function logOutUser() {
+  const { error } = await supabase.auth.signOut();
+  if (error) return { success: false, error: error.message };
+  return { success: true, error: null };
+}

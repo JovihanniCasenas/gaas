@@ -55,7 +55,7 @@ export default function LoginPage() {
   }
   
   return (
-    <div className="flex items-center justify-center h-full">
+    <div className="flex items-center justify-center h-full mt-10">
       <Card className="w-full">
         <CardHeader>
           <CardTitle>{isLogin ? "Login to your account" : "Create a new account"}</CardTitle>
@@ -111,12 +111,8 @@ export default function LoginPage() {
                 </InputGroup>
               </div>
             </div>
-            <Button type="submit" disabled={isLoading} className="w-full flex-col gap-2 mt-6">
-              {isLoading ? (
-                <div className="flex items-center justify-center gap-2">
-                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent" />
-                </div>
-              ) : isLogin ? "Login" : "Sign Up"}
+            <Button type="submit" isLoading={isLoading} className="w-full flex-col gap-2 mt-6">
+              {isLogin ? "Login" : "Sign Up"}
             </Button>
           </form>
         </CardContent>

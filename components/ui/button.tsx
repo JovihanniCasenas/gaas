@@ -33,6 +33,10 @@ const buttonVariants = cva(
           "size-8 rounded-[min(var(--radius-md),10px)] in-data-[slot=button-group]:rounded-md",
         "icon-lg": "size-10",
       },
+      intent: {
+        default: "",
+        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/80 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
+      }
     },
     defaultVariants: {
       variant: "default",
@@ -46,10 +50,14 @@ function Button({
   variant = "default",
   size = "default",
   asChild = false,
+  intent = "default",
+  isLoading = false,
+  children,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean
+    isLoading?: boolean
   }) {
   const Comp = asChild ? Slot.Root : "button"
 
@@ -58,9 +66,18 @@ function Button({
       data-slot="button"
       data-variant={variant}
       data-size={size}
-      className={cn(buttonVariants({ variant, size, className }))}
+      disabled={isLoading || props.disabled}
+      className={cn(buttonVariants({ variant, size, intent, className }))}
       {...props}
-    />
+    >
+      {isLoading ? (
+        <div className="flex items-center justify-center gap-2">
+          <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-r-transparent" />
+        </div>
+      ) : (
+        children
+      )}
+    </Comp>
   )
 }
 
