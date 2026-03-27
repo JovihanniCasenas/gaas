@@ -1,11 +1,11 @@
-import { createClient } from '@/lib/utils/supabase/server'
-import { cookies } from 'next/headers'
+import { createClient } from "@/lib/utils/supabase/server"
+import { cookies } from "next/headers"
 
 export default async function Page() {
   const cookieStore = cookies()
   const supabase = await createClient(cookieStore)
 
-  const { data: stations } = await supabase.from('stations').select()
+  const { data: stations } = await supabase.from("stations").select()
 
   return (
     <>
