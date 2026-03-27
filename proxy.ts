@@ -3,7 +3,9 @@ import { type NextRequest, NextResponse } from "next/server"
 
 export async function proxy(request: NextRequest) {
   const { supabase, supabaseResponse } = createClient(request)
-  const { data: { user } } = await supabase.auth.getUser()
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
 
   const isAuthPage = request.nextUrl.pathname.startsWith("/login")
 
@@ -15,9 +17,11 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url))
   }
 
-  return supabaseResponse;
+  return supabaseResponse
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"],
+  matcher: [
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+  ],
 }

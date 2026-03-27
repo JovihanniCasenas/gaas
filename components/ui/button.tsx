@@ -35,14 +35,15 @@ const buttonVariants = cva(
       },
       intent: {
         default: "",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/80 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
-      }
+        destructive:
+          "bg-destructive text-destructive-foreground hover:bg-destructive/80 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
+      },
     },
     defaultVariants: {
       variant: "default",
       size: "default",
     },
-  }
+  },
 )
 
 function Button({

@@ -1,37 +1,37 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, Source_Sans_3 } from "next/font/google";
-import "./globals.css";
-import { cn } from "@/lib/utils";
-import { Toaster } from "@/components/ui/sonner";
-import { SidebarProvider } from "@/components/ui/sidebar";
-import AppHeader from "@/components/app/header";
-import AppSidebar from "@/components/app/sidebar";
-import Providers from "./providers";
+import type { Metadata } from "next"
+import { Geist, Geist_Mono, Source_Sans_3 } from "next/font/google"
+import "./globals.css"
+import { cn } from "@/lib/utils"
+import { Toaster } from "@/components/ui/sonner"
+import { SidebarProvider } from "@/components/ui/sidebar"
+import AppHeader from "@/components/app/header"
+import AppSidebar from "@/components/app/sidebar"
+import Providers from "./providers"
 
 const sourceSans3 = Source_Sans_3({
   subsets: ["latin"],
   variable: "--font-sans",
-});
+})
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-});
+})
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-});
+})
 
 export const metadata: Metadata = {
   title: "Gaas",
   description: "Community-backed gas prices tracker",
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en" className={cn("font-sans", sourceSans3.variable)}>
@@ -54,5 +54,5 @@ export default function RootLayout({
         </div>
       </body>
     </html>
-  );
+  )
 }
