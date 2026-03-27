@@ -5,7 +5,8 @@ CREATE TABLE prices (
   image_url text,
   station_id uuid REFERENCES stations(id) ON DELETE CASCADE,
   created_by uuid REFERENCES users(id),
-  created_at timestamptz DEFAULT now()
+  created_at timestamptz DEFAULT now(),
+  updated_at timestamptz DEFAULT now()
 );
 
 CREATE TABLE votes (
@@ -21,5 +22,6 @@ CREATE TABLE comments (
   content text NOT NULL,
   user_id uuid REFERENCES users(id),
   price_id uuid REFERENCES prices(id) ON DELETE CASCADE,
-  created_at timestamptz DEFAULT now()
+  created_at timestamptz DEFAULT now(),
+  updated_at timestamptz DEFAULT now()
 );
