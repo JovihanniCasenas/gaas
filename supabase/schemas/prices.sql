@@ -1,6 +1,7 @@
 CREATE TABLE prices (
   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
   amount decimal(10,3) NOT NULL,
+  fuel_type text NOT NULL,
   image_url text,
   station_id uuid REFERENCES stations(id) ON DELETE CASCADE,
   created_by uuid REFERENCES users(id),
