@@ -27,3 +27,12 @@ CREATE TABLE comments (
   created_at timestamptz DEFAULT now(),
   updated_at timestamptz DEFAULT now()
 );
+
+CREATE VIEW prices_with_votes AS
+SELECT
+  p.*,
+  COUNT(v.id) FILTER (WHERE v.vote_type = 'upvote')   AS upvotes,
+  COUNT(v.id) FILTER (WHERE v.vote_type = 'downvote') AS downvotes
+FROM prices p
+LEFT JOIN votes v ON v.price_id = p.id
+GROUP BY p.id;
