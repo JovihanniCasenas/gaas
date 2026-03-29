@@ -3,7 +3,9 @@ CREATE TABLE stations (
   name text NOT NULL,
   location text,
   created_at timestamptz DEFAULT now(),
-  created_by uuid REFERENCES users(id)
+  created_by uuid REFERENCES users(id),
+  updated_at timestamptz DEFAULT now(),
+  updated_by uuid REFERENCES users(id)
 );
 
 CREATE TABLE saved_stations (

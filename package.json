@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "migrate:generate": "supabase db diff -f",
+    "migrate:up": "supabase migration up",
+    "migrate:deploy": "supabase login && supabase link && supabase db push",
+    "types:generate": "supabase gen types typescript --local > ./lib/types/supabase.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.9.0",
