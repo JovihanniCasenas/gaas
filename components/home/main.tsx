@@ -40,11 +40,24 @@ export default function Home() {
   useEffect(() => {
     if (mapRef.current || !containerRef.current) return
 
+    // Get user geolocation and center map there if available
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords
+          mapRef.current?.setCenter([longitude, latitude])
+        },
+        (error) => {
+          mapRef.current?.setCenter([123.8854, 10.3157])
+          console.warn("Geolocation failed, using default center", error)
+        },
+      )
+    }
+
     const map = new maplibregl.Map({
       container: containerRef.current,
       style: "https://tiles.openfreemap.org/styles/liberty",
-      center: [-74.5, 40],
-      zoom: 9,
+      zoom: 16,
       attributionControl: {
         compact: true,
       },
