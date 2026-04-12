@@ -130,3 +130,13 @@
     @apply font-sans;
   }
 }
+
+/* MapLibre geocoder full-width override */
+.maplibregl-ctrl-geocoder {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+.maplibregl-ctrl-geocoder--input {
+  width: 100% !important;
+}

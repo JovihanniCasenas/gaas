@@ -43,9 +43,16 @@ export default function RootLayout({
             <Providers>
               <SidebarProvider>
                 <AppSidebar />
-                <div className="flex flex-col flex-1 min-w-0">
+                <div className="flex flex-col flex-1 min-w-0 h-screen">
                   <AppHeader />
-                  <div className="p-4">{children}</div>
+                  <div
+                    style={{
+                      height: "calc(100vh - 128px)",
+                      padding: "16px",
+                    }}
+                  >
+                    {children}
+                  </div>
                 </div>
                 <Toaster position="top-center" />
               </SidebarProvider>
