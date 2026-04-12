@@ -17,3 +17,17 @@ CREATE TABLE saved_stations (
 CREATE INDEX stations_geo_index
   ON public.stations
   USING GIST (location);
+
+CREATE OR REPLACE FUNCTION nearby_stations(lat float, lng float, radius_m float)
+RETURNS setof stations AS $$
+  SELECT * FROM stations
+  WHERE ST_DWithin(
+    location,
+    ST_SetSRID(ST_MakePoint(lng, lat), 4326)::extensions.geography,
+    radius_m
+  )
+  ORDER BY ST_Distance(
+    location,
+    ST_SetSRID(ST_MakePoint(lng, lat), 4326)::extensions.geography
+  )
+$$ language sql stable;
