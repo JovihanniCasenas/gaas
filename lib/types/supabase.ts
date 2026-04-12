@@ -172,7 +172,7 @@ export type Database = {
           created_at: string | null
           created_by: string | null
           id: string
-          location: string | null
+          location: unknown
           name: string
           updated_at: string | null
           updated_by: string | null
@@ -181,7 +181,7 @@ export type Database = {
           created_at?: string | null
           created_by?: string | null
           id?: string
-          location?: string | null
+          location: unknown
           name: string
           updated_at?: string | null
           updated_by?: string | null
@@ -190,7 +190,7 @@ export type Database = {
           created_at?: string | null
           created_by?: string | null
           id?: string
-          location?: string | null
+          location?: unknown
           name?: string
           updated_at?: string | null
           updated_by?: string | null
